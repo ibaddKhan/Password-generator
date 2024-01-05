@@ -8,7 +8,7 @@ function App() {
   let [tempIcon, setTempIcon] = useState(faCopy);
   let [range, setRange] = useState('');
   let [UpperCase, upperCaseChecked] = useState('');
-  let [numbers,numbersChecked] = useState('');
+  let [numbers, numbersChecked] = useState('');
   let [symbols, symbolsChecked] = useState('');
 
   useEffect(() => {
@@ -18,7 +18,7 @@ function App() {
         setTempIcon(faCopy)
       }, 2000);
     }
-  }, [tempIcon, range,symbols,UpperCase,numbers]);
+  }, [tempIcon, range, symbols, UpperCase, numbers]);
   function copyText(e) {
     setTempIcon(faCircleCheck)
     navigator.clipboard.writeText(textInp);
@@ -31,23 +31,28 @@ function App() {
     let numStr = '0123456789'
     let symStr = '!@#$%^&*()_+-=[]{};:"|,.<>/?'
     let pass = ''
-    if (UpperCase) {
-      pass += capStr[Math.floor(Math.random() * capStr.length)]
-      setTextInp(pass)
-    }
-    if (numbers) {
-      pass += numStr[Math.floor(Math.random() * numStr.length)]
-      setTextInp(pass)
-    }
-    if (symbols) {
-      pass += symStr[Math.floor(Math.random() * symStr.length)]
-      setTextInp(pass)
-    }
+    const getRandomChar = (randomChar) => {
+      return randomChar[Math.floor(Math.random() * randomChar.length)];
+    };
+
+
     for (let i = 0; i < range; i++) {
       pass += smallStr[Math.floor(Math.random() * smallStr.length)]
       setTextInp(pass)
+      if (UpperCase) {
+        pass += getRandomChar(capStr)
+        setTextInp(pass)
+      }
+      if (numbers) {
+        pass += getRandomChar(numStr)
+        setTextInp(pass)
+      }
+      if (symbols) {
+        pass += getRandomChar(symStr)
+        setTextInp(pass)
+      }
     }
-   
+    setTextInp(pass.slice(0,range))
   }
   return (
     <>
@@ -66,11 +71,11 @@ function App() {
           </div>
           <div className=''>
             <label htmlFor="UpperCase">Uppercase</label>
-            <input onChange={e=>upperCaseChecked(e.target.checked)} id='UpperCase' type="checkbox" />
+            <input onChange={e => upperCaseChecked(e.target.checked)} id='UpperCase' type="checkbox" />
             <label htmlFor="numbers">Numbers</label>
-            <input onChange={e=>numbersChecked(e.target.checked)} id='numbers' type="checkbox" />
+            <input onChange={e => numbersChecked(e.target.checked)} id='numbers' type="checkbox" />
             <label htmlFor="Symbols">Symbols</label>
-            <input onChange={e=>symbolsChecked(e.target.checked)}  id='Symbols' type="checkbox" /></div>
+            <input onChange={e => symbolsChecked(e.target.checked)} id='Symbols' type="checkbox" /></div>
         </div>
       </div>
     </>
