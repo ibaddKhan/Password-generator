@@ -73,7 +73,7 @@ function App() {
 
             </label>
           </div>
-          <div className=''>
+          <div className='space-x-2'>
             <label htmlFor="UpperCase">Uppercase</label>
             <input onChange={e => upperCaseChecked(e.target.checked)} id='UpperCase' type="checkbox" />
             <label htmlFor="numbers">Numbers</label>
