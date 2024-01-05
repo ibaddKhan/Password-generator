@@ -6,7 +6,7 @@ import { faCopy, faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 function App() {
   let [textInp, setTextInp] = useState('');
   let [tempIcon, setTempIcon] = useState(faCopy);
-  let [range, setRange] = useState('');
+  let [range, setRange] = useState(8);
   let [UpperCase, upperCaseChecked] = useState('');
   let [numbers, numbersChecked] = useState('');
   let [symbols, symbolsChecked] = useState('');
@@ -54,17 +54,21 @@ function App() {
     }
     setTextInp(pass.slice(0,range))
   }
+  useEffect(() => {
+    generatePass();
+  }, []);
   return (
     <>
+        <h1 className='text-center text-4xl mt-10 '>Password-Generator</h1>
       <div className='flex justify-center items-center h-52'>
         <div>
           <div>
             <input value={textInp} onChange={e => setTextInp(e.target.value)} className='pass-inp px-1 border-2 w-[30vw] border-black rounded-lg' type="text" name="" id="" />
 
-            <FontAwesomeIcon onClick={(e) => copyText(e)} className=' ml-2 text-[1.4rem]' icon={tempIcon} />
+            <FontAwesomeIcon onClick={(e) => copyText(e)} className=' cursor-pointer ml-2 text-[1.4rem]' icon={tempIcon} />
 
           </div>
-          <div className='flex items-center mt-2'>   <input min={8} max={20} onChange={(e) => setRange(e.target.value)} type="range" id='range' />
+          <div className='flex items-center mt-2'>   <input min={0} max={20} onChange={(e) => setRange(e.target.value)} type="range" id='range' />
             <label className='mr-2' htmlFor="range">{range}
 
             </label>
