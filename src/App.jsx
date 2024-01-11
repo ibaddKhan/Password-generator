@@ -59,29 +59,48 @@ function App() {
   }, []);
   return (
     <>
-        <h1 className='text-center text-4xl mt-10 '>Password-Generator</h1>
-      <div className='flex justify-center items-center h-52'>
-        <div>
-          <div>
-            <input value={textInp} onChange={e => setTextInp(e.target.value)} className='pass-inp px-1 border-2 w-[30vw] border-black rounded-lg' type="text" name="" id="" />
+      <h1 className='text-center text-4xl mt-10'>Password-Generator</h1>
+<div className='flex justify-center items-center h-52'>
+  <div>
+    <div className='flex justify-center'>
+      <input
+        value={textInp}
+        onChange={(e) => setTextInp(e.target.value)}
+        className='pass-inp px-1 max-w-[40vw] w-[70vw] border-2 border-black rounded-lg'
+        type="text"
+        name=""
+        id=""
+      />
+      <FontAwesomeIcon
+        onClick={(e) => copyText(e)}
+        className='cursor-pointer ml-2 text-[1.4rem]'
+        icon={tempIcon}
+      />
+    </div>
+    <div className='flex items-center mt-2'>
+      <input
+        min={0}
+        max={20}
+        onChange={(e) => setRange(e.target.value)}
+        type="range"
+        className='w-full lg:w-[30vw] md:w-[30vw] sm:w-[80vw]'
+        id='range'
+      />
+      <label className='mr-2' htmlFor="range">
+        {range}
+      </label>
+    </div>
+    <div className='space-x-2'>
+      <label htmlFor="UpperCase">Uppercase</label>
+      <input onChange={e => upperCaseChecked(e.target.checked)} id='UpperCase' type="checkbox" />
+      <label htmlFor="numbers">Numbers</label>
+      <input onChange={e => numbersChecked(e.target.checked)} id='numbers' type="checkbox" />
+      <label htmlFor="Symbols">Symbols</label>
+      <input onChange={e => symbolsChecked(e.target.checked)} id='Symbols' type="checkbox" />
+    </div>
+  </div>
+</div>
 
-            <FontAwesomeIcon onClick={(e) => copyText(e)} className=' cursor-pointer ml-2 text-[1.4rem]' icon={tempIcon} />
-
-          </div>
-          <div className='flex items-center mt-2'>   <input min={0} max={20} onChange={(e) => setRange(e.target.value)} type="range" id='range' />
-            <label className='mr-2' htmlFor="range">{range}
-
-            </label>
-          </div>
-          <div className='space-x-2'>
-            <label htmlFor="UpperCase">Uppercase</label>
-            <input onChange={e => upperCaseChecked(e.target.checked)} id='UpperCase' type="checkbox" />
-            <label htmlFor="numbers">Numbers</label>
-            <input onChange={e => numbersChecked(e.target.checked)} id='numbers' type="checkbox" />
-            <label htmlFor="Symbols">Symbols</label>
-            <input onChange={e => symbolsChecked(e.target.checked)} id='Symbols' type="checkbox" /></div>
-        </div>
-      </div>
     </>
   )
 }
